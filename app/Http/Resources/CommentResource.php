@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +16,12 @@ class PostResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'title'=> $this->title,
-            'image'=> $this->image,
-            'news_content' => $this->news_content,
-            'created_at'=> date("Y/m/d H:i:s", strtotime($this->created_at)),
+            'post_id'=> $this->post_id,
+            'user_id'=> $this->user_id,
+            'comment_content'=> $this->comment_content,
+            'created_at'=> date("Y-m-d H:i:s", strtotime($this->created_at)), 
+            'comentator' => $this->whenLoaded('comentator'),
+            'judulArtikel' => $this->whenLoaded('judulArtikel'),
         ];
     }
 }
